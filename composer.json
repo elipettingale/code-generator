@@ -1,0 +1,21 @@
+{
+  "name": "elipettingale/code-generator",
+  "description": "A package for quickly generating code.",
+  "type": "library",
+  "require": {
+    "php": "^7.0",
+    "elipettingale/case-converter": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "EliPett\\CodeGeneration\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Elliot Pettingale",
+      "email": "elipettingale@gmail.com"
+    }
+  ]
+}
