@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/src/CodeGenerator.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use EliPett\CodeGeneration\CodeGenerator;
 
