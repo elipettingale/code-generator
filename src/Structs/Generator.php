@@ -15,6 +15,19 @@ class Generator
 
     public function run(): void
     {
+        $parameters = [];
+
+        /** @var Stub $stub */
+        foreach ($this->stubs as $stub) {
+            foreach ($stub->parameters() as $parameter) {
+                if (!\in_array($parameter, $parameters, false)) {
+                    $parameters[] = $parameter;
+                }
+            }
+        }
+
+        var_dump($parameters);
+
         // todo: scan each stub for parameters
         // todo: ask for user input for each parameter
         // todo: run each stub passing parameters
