@@ -4,7 +4,7 @@ namespace EliPett\CodeGeneration\Structs;
 
 class Generator
 {
-    private $name;
+    public $name;
     private $stubs;
 
     public function __construct(array $data, array $stubs)

@@ -6,7 +6,7 @@ use EliPett\CaseConverter\Enums\CaseConversion;
 
 class Stub
 {
-    private $name;
+    public $name;
     private $path;
     private $target;
 

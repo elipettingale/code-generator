@@ -4,16 +4,15 @@ namespace EliPett\CodeGeneration\Structs;
 
 class Profile
 {
-    private $name;
-    private $path;
+    public $name;
     private $generators;
 
     public function __construct(string $name)
     {
-        $this->path = '/Users/' . get_current_user() . "/.code_generation/profiles/{$name}";
+        $path = '/Users/' . get_current_user() . "/.code_generation/profiles/{$name}";
 
         $data = json_decode(
-            file_get_contents("{$this->path}/profile.json"), true
+            file_get_contents("{$path}/profile.json"), true
         );
 
         $this->name = $data['name'];
@@ -24,7 +23,7 @@ class Profile
             foreach ($generator['stubs'] as $stub) {
                 $stubs[$stub['name']] = new Stub([
                     'name' => $stub['name'],
-                    'path' => $this->path . '/stubs/' . $stub['path'],
+                    'path' => $path . '/stubs/' . $stub['path'],
                     'target' => $stub['target']
                 ]);
             }
