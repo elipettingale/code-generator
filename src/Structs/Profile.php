@@ -28,7 +28,7 @@ class Profile
                 ]);
             }
 
-            $this->generators[$generator['name']] = new Generator([
+            $this->generators[$generator['alias']] = new Generator([
                 'name' => $generator['name']
             ], $stubs);
         }
