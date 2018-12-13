@@ -82,7 +82,8 @@ class Stub
                     '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::LOWER_CAMEL_CASE) . '$',
                     '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_CAMEL_CASE) . '$',
                     '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::LOWER_HYPHEN_CASE) . '$',
-                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_HYPHEN_CASE) . '$'
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_HYPHEN_CASE) . '$',
+                    '$NOW$'
                 ],
                 [
                     $value,
@@ -95,6 +96,7 @@ class Stub
                     upper_camel_case($value),
                     lower_hyphen_case($value),
                     upper_hyphen_case($value),
+                    date('Y_m_d_His')
                 ],
                 $contents
             );
