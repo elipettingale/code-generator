@@ -2,59 +2,49 @@
 
 namespace EliPett\CodeGeneration;
 
+use EliPett\CodeGeneration\Structs\Map;
+use EliPett\CodeGeneration\Structs\Profile;
+
 class CodeGenerator
 {
+    /** @var Map */
+    private $map;
+
+    /** @var Profile */
     private $profile;
 
-    private function map(string $path = null)
+    public function __construct()
     {
-        $map = json_decode(
-            file_get_contents(__DIR__ . '/../../../../../.code_generation/map.json'), true
-        );
-
-        if ($path !== null) {
-            if (!array_key_exists($path, $map)) {
-                return null;
-            }
-
-            return $map[$path];
-        }
-
-        return $map;
-    }
-
-    private function profile(string $name): array
-    {
-        return json_decode(
-            file_get_contents(__DIR__ . "/../../../../../.code_generation/profiles/{$name}.json"), true
-        );
-    }
-
-    private function hasProfile(string $path): bool
-    {
-        return $this->map($path) !== null;
-    }
-
-    private function loadProfile(string $path): void
-    {
-        $this->profile = $this->profile(
-            $this->map($path)
-        );
+        $this->map = new Map();
     }
 
     public function load(string $path): bool
     {
-        if ($this->hasProfile($path)) {
-            $this->loadProfile($path);
+        if ($this->map->hasProfile($path)) {
+            $this->profile = $this->map->getProfile($path);
 
             return true;
         }
 
+        $profile = readline('Use Profile: ');
+
+        $this->map->setProfile($path, $profile);
+        $this->map->save();
+
         return false;
     }
 
-    public function run(string $key): void
+    public function run(string $name): bool
     {
-        // todo: run generator
+        if (!$this->profile->hasGenerator($name)) {
+            echo "Generator Not Found: $name \n";
+
+            return false;
+        }
+
+        $generator = $this->profile->getGenerator($name);
+        $generator->run();
+
+        return true;
     }
 }
