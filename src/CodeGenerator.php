@@ -31,7 +31,7 @@ class CodeGenerator
         $this->map->setProfile($path, $profile);
         $this->map->save();
 
-        return false;
+        return $this->load($path);
     }
 
     public function run(string $name): bool
