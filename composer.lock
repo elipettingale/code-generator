@@ -1,0 +1,59 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ed08b4f306987640610757399a35ae70",
+    "packages": [
+        {
+            "name": "elipettingale/case-converter",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elipettingale/case-converter.git",
+                "reference": "daeb152ba6b58c6b10c60dfcfe85aab9d7c83d78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elipettingale/case-converter/zipball/daeb152ba6b58c6b10c60dfcfe85aab9d7c83d78",
+                "reference": "daeb152ba6b58c6b10c60dfcfe85aab9d7c83d78",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EliPett\\CaseConverter\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Elliot Pettingale",
+                    "email": "elipettingale@gmail.com"
+                }
+            ],
+            "description": "Some helper functions for quickly converting strings to various cases.",
+            "time": "2018-05-31T14:35:35+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7.0"
+    },
+    "platform-dev": []
+}
