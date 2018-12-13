@@ -26,6 +26,11 @@ class CodeGenerator
             return true;
         }
 
+        $profile = readline('Use Profile: ');
+
+        $this->map->setProfile($path, $profile);
+        $this->map->save();
+
         return false;
     }
 
