@@ -19,8 +19,15 @@ class Stub
 
     public function parameters(): array
     {
-        $contents = file_get_contents($this->path);
+        $parameters = $this->scan(file_get_contents($this->path));
+        $parameters = array_merge($parameters, $this->scan($this->target['directory']));
+        $parameters = array_merge($parameters, $this->scan($this->target['file_name']));
 
+        return array_unique($parameters);
+    }
+
+    private function scan(string $contents): array
+    {
         $parameters = [];
 
         $conversions = [
