@@ -50,8 +50,42 @@ class Stub
 
     public function generate(array $parameters): void
     {
-        // todo: get contents
-        // todo: replace with parameters
-        // todo: save file
+        $contents = file_get_contents($this->path);
+
+        foreach ($parameters as $key => $value) {
+            $contents = str_replace(
+                [
+                    '$' . strtoupper($key) . '_' . strtoupper('NO_CASE') . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::LOWER_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::TIGHT_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::LOWER_SNAKE_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_SNAKE_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::LOWER_CAMEL_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_CAMEL_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::LOWER_HYPHEN_CASE) . '$',
+                    '$' . strtoupper($key) . '_' . strtoupper(CaseConversion::UPPER_HYPHEN_CASE) . '$'
+                ],
+                [
+                    $value,
+                    lower_case($value),
+                    upper_case($value),
+                    tight_case($value),
+                    lower_snake_case($value),
+                    upper_snake_case($value),
+                    lower_camel_case($value),
+                    upper_camel_case($value),
+                    lower_hyphen_case($value),
+                    upper_hyphen_case($value),
+                ],
+                $contents
+            );
+        }
+
+        if (!is_dir($this->target['directory'])) {
+            mkdir($this->target['directory'], 0777, true);
+        }
+
+        file_put_contents($this->target['directory'] . '/' . $this->target['file_name'], $contents);
     }
 }

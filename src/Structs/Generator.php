@@ -26,10 +26,15 @@ class Generator
             }
         }
 
-        var_dump($parameters);
+        $values = [];
 
-        // todo: scan each stub for parameters
-        // todo: ask for user input for each parameter
-        // todo: run each stub passing parameters
+        foreach ($parameters as $parameter) {
+            $values[$parameter] = readline($parameter . ': ');
+        }
+
+        /** @var Stub $stub */
+        foreach ($this->stubs as $stub) {
+            $stub->generate($values);
+        }
     }
 }
