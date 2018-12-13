@@ -29,12 +29,15 @@ class Generator
         $values = [];
 
         foreach ($parameters as $parameter) {
-            $values[$parameter] = readline($parameter . ': ');
+            $values[$parameter] = ask($parameter);
         }
+
+        echo "\n";
 
         /** @var Stub $stub */
         foreach ($this->stubs as $stub) {
             $stub->generate($values);
+            info("Generated: {$stub->name}\n");
         }
     }
 }

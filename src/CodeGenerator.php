@@ -26,7 +26,7 @@ class CodeGenerator
             return true;
         }
 
-        $profile = readline('Use Profile: ');
+        $profile = ask('Profile');
 
         $this->map->setProfile($path, $profile);
         $this->map->save();
@@ -37,12 +37,14 @@ class CodeGenerator
     public function run(string $name): bool
     {
         if (!$this->profile->hasGenerator($name)) {
-            echo "Generator Not Found: $name \n";
+            error("Generator Not Found: $name \n");
 
             return false;
         }
 
         $generator = $this->profile->getGenerator($name);
+
+        info("Running Generator: {$generator->name} \n");
         $generator->run();
 
         return true;
