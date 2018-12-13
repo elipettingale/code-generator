@@ -50,8 +50,19 @@ class Stub
 
     public function generate(array $parameters): void
     {
-        $contents = file_get_contents($this->path);
+        $contents = $this->filter(file_get_contents($this->path), $parameters);
+        $directory = $this->filter($this->target['directory'], $parameters);
+        $filename = $this->filter($this->target['file_name'], $parameters);
 
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        file_put_contents($directory . '/' . $filename, $contents);
+    }
+
+    private function filter(string $contents, array $parameters): string
+    {
         foreach ($parameters as $key => $value) {
             $contents = str_replace(
                 [
@@ -82,10 +93,6 @@ class Stub
             );
         }
 
-        if (!is_dir($this->target['directory'])) {
-            mkdir($this->target['directory'], 0777, true);
-        }
-
-        file_put_contents($this->target['directory'] . '/' . $this->target['file_name'], $contents);
+        return $contents;
     }
 }
