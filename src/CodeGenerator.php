@@ -34,19 +34,16 @@ class CodeGenerator
         return $this->load($path);
     }
 
-    public function run(string $name): bool
+    public function run(string $name): void
     {
-        if (!$this->profile->hasGenerator($name)) {
-            error("Generator Not Found: $name \n");
+        try {
 
-            return false;
+            $this->profile
+                ->getGenerator($name)
+                ->run();
+
+        } catch (\Exception $exception) {
+            error($exception->getMessage() . "\n");
         }
-
-        $generator = $this->profile->getGenerator($name);
-
-        info("Running Generator: {$generator->name} \n");
-        $generator->run();
-
-        return true;
     }
 }

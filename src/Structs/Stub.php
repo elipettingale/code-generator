@@ -17,11 +17,37 @@ class Stub
         $this->target = $data['target'];
     }
 
+    private function contents()
+    {
+        if (!file_exists($this->path)) {
+            throw new \InvalidArgumentException("Invalid Stub Path: {$this->path}");
+        }
+        return file_get_contents($this->path);
+    }
+
+    private function targetDirectory()
+    {
+        return $this->target['directory'];
+    }
+
+    private function targetFilename()
+    {
+        return $this->target['file_name'];
+    }
+
     public function parameters(): array
     {
-        $parameters = $this->scan(file_get_contents($this->path));
-        $parameters = array_merge($parameters, $this->scan($this->target['directory']));
-        $parameters = array_merge($parameters, $this->scan($this->target['file_name']));
+        $parameters = $this->scan(
+            $this->contents()
+        );
+
+        $parameters = array_merge(
+            $parameters, $this->scan($this->targetDirectory())
+        );
+
+        $parameters = array_merge(
+            $parameters, $this->scan($this->targetFilename())
+        );
 
         return array_unique($parameters);
     }
@@ -57,9 +83,17 @@ class Stub
 
     public function generate(array $parameters): void
     {
-        $contents = $this->filter(file_get_contents($this->path), $parameters);
-        $directory = $this->filter($this->target['directory'], $parameters);
-        $filename = $this->filter($this->target['file_name'], $parameters);
+        $contents = $this->filter(
+            $this->contents(), $parameters
+        );
+
+        $directory = $this->filter(
+            $this->targetDirectory(), $parameters
+        );
+
+        $filename = $this->filter(
+            $this->targetFilename(), $parameters
+        );
 
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);

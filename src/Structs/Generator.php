@@ -15,6 +15,8 @@ class Generator
 
     public function run(): void
     {
+        info("Running Generator: {$this->name} \n");
+
         $parameters = [];
 
         /** @var Stub $stub */
