@@ -34,13 +34,12 @@ class Profile
         }
     }
 
-    public function hasGenerator(string $name): bool
-    {
-        return array_key_exists($name, $this->generators);
-    }
-
     public function getGenerator(string $name): Generator
     {
+        if (!array_key_exists($name, $this->generators)) {
+            throw new \InvalidArgumentException("Generator Not Found: $name");
+        }
+
         return $this->generators[$name];
     }
 }
