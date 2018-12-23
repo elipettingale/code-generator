@@ -26,10 +26,29 @@ class CodeGenerator
             return true;
         }
 
+        readline_completion_function(function($input) {
+            $profiles = $this->map->getAvailableProfiles();
+            $matches = [];
+
+            foreach ($profiles as $profile) {
+                if (stripos($profile, $input) === 0) {
+                    $matches[] = $profile;
+                }
+            }
+
+            if (\count($matches) === 0) {
+                return null;
+            }
+
+            return $matches;
+        });
+
         $profile = ask('Profile');
 
         $this->map->setProfile($path, $profile);
         $this->map->save();
+
+        echo "\n";
 
         return $this->load($path);
     }

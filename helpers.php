@@ -14,5 +14,10 @@ function ask(string $text)
 {
     echo "\n";
     echo " \033[32mEnter {$text}:\033[0m \n";
-    return readline(' > ');
+    return trim(readline(' > '));
+}
+
+function config_path(string $path)
+{
+    return '/Users/' . get_current_user() . '/.code_generation/' . $path;
 }
