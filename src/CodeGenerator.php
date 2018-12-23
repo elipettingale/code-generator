@@ -31,6 +31,8 @@ class CodeGenerator
         $this->map->setProfile($path, $profile);
         $this->map->save();
 
+        echo "\n";
+
         return $this->load($path);
     }
 
