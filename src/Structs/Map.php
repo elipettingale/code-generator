@@ -9,11 +9,18 @@ class Map
 
     public function __construct()
     {
-        $this->path = '/Users/' . get_current_user() . '/.code_generation/map.json';
+        $this->path = config_path('map.json');
 
         $this->data = json_decode(
             file_get_contents($this->path), true
         );
+    }
+
+    public function getAvailableProfiles(): array
+    {
+        $profiles = scandir(config_path('profiles'), SCANDIR_SORT_ASCENDING);
+
+        return array_diff($profiles, ['.', '..', '.DS_Store']);
     }
 
     public function hasProfile(string $path): bool
