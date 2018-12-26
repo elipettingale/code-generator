@@ -43,10 +43,11 @@ class CodeGenerator
             return $matches;
         });
 
-        $profile = ask('Profile');
+        $profile = self::ask('Profile');
 
         $this->map->setProfile($path, $profile);
         $this->map->save();
+
 
         echo "\n";
 
@@ -62,7 +63,29 @@ class CodeGenerator
                 ->run();
 
         } catch (\Exception $exception) {
-            error($exception->getMessage() . "\n");
+            self::error($exception->getMessage() . "\n");
         }
+    }
+
+    public static function error(string $text): void
+    {
+        echo "\033[31m{$text}\033[0m";
+    }
+
+    public static function info(string $text): void
+    {
+        echo "\033[34m{$text}\033[0m";
+    }
+
+    public static function ask(string $text)
+    {
+        echo "\n";
+        echo " \033[32mEnter {$text}:\033[0m \n";
+        return trim(readline(' > '));
+    }
+
+    public static function config_path(string $path): string
+    {
+        return '/Users/' . get_current_user() . '/.code_generation/' . $path;
     }
 }

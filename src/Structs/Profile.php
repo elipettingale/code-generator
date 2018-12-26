@@ -2,6 +2,8 @@
 
 namespace EliPett\CodeGeneration\Structs;
 
+use EliPett\CodeGeneration\CodeGenerator;
+
 class Profile
 {
     public $name;
@@ -9,7 +11,7 @@ class Profile
 
     public function __construct(string $name)
     {
-        $path = '/Users/' . get_current_user() . "/.code_generation/profiles/{$name}";
+        $path = CodeGenerator::config_path("profiles/{$name}");
 
         $data = json_decode(
             file_get_contents("{$path}/profile.json"), true
