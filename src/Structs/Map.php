@@ -2,6 +2,8 @@
 
 namespace EliPett\CodeGeneration\Structs;
 
+use EliPett\CodeGeneration\CodeGenerator;
+
 class Map
 {
     private $path;
@@ -9,7 +11,7 @@ class Map
 
     public function __construct()
     {
-        $this->path = config_path('map.json');
+        $this->path = CodeGenerator::config_path('map.json');
 
         $this->data = json_decode(
             file_get_contents($this->path), true
@@ -18,7 +20,7 @@ class Map
 
     public function getAvailableProfiles(): array
     {
-        $profiles = scandir(config_path('profiles'), SCANDIR_SORT_ASCENDING);
+        $profiles = scandir(CodeGenerator::config_path('profiles'), SCANDIR_SORT_ASCENDING);
 
         return array_diff($profiles, ['.', '..', '.DS_Store']);
     }

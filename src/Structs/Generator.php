@@ -2,6 +2,8 @@
 
 namespace EliPett\CodeGeneration\Structs;
 
+use EliPett\CodeGeneration\CodeGenerator;
+
 class Generator
 {
     public $name;
@@ -15,7 +17,7 @@ class Generator
 
     public function run(): void
     {
-        info("Running Generator: {$this->name} \n");
+        CodeGenerator::info("Running Generator: {$this->name} \n");
 
         $parameters = [];
 
@@ -31,7 +33,7 @@ class Generator
         $values = [];
 
         foreach ($parameters as $parameter) {
-            $values[$parameter] = ask($parameter);
+            $values[$parameter] = CodeGenerator::ask($parameter);
         }
 
         echo "\n";
@@ -39,7 +41,7 @@ class Generator
         /** @var Stub $stub */
         foreach ($this->stubs as $stub) {
             $stub->generate($values);
-            info("Generated: {$stub->name}\n");
+            CodeGenerator::info("Generated: {$stub->name}\n");
         }
     }
 }
