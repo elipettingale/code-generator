@@ -86,6 +86,6 @@ class CodeGenerator
 
     public static function config_path(string $path): string
     {
-        return '/Users/' . get_current_user() . '/.code_generation/' . $path;
+        return $_SERVER['HOME'] . '/.code_generation/' . $path;
     }
 }
