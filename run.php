@@ -1,6 +1,10 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+spl_autoload_register(function ($class) {
+    include str_replace('\\', '/',
+        str_replace('EliPett\\CodeGeneration', 'src', $class)
+    ) . '.php';
+});
 
 use EliPett\CodeGeneration\CodeGenerator;
 
