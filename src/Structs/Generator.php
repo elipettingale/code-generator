@@ -15,7 +15,7 @@ class Generator
         $this->stubs = $stubs;
     }
 
-    public function run(): void
+    public function run()
     {
         CodeGenerator::info("Running Generator: {$this->name} \n");
 

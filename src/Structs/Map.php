@@ -35,7 +35,7 @@ class Map
         return new Profile($this->data[$path]);
     }
 
-    public function setProfile(string $path, string $profile): void
+    public function setProfile(string $path, string $profile)
     {
         $this->data[$path] = $profile;
     }
