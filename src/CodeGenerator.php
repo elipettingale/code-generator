@@ -54,7 +54,7 @@ class CodeGenerator
         return $this->load($path);
     }
 
-    public function run(string $name): void
+    public function run(string $name)
     {
         try {
 
@@ -67,12 +67,12 @@ class CodeGenerator
         }
     }
 
-    public static function error(string $text): void
+    public static function error(string $text)
     {
         echo "\033[31m{$text}\033[0m";
     }
 
-    public static function info(string $text): void
+    public static function info(string $text)
     {
         echo "\033[34m{$text}\033[0m";
     }

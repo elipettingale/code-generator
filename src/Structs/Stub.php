@@ -81,7 +81,7 @@ class Stub
         return $parameters;
     }
 
-    public function generate(array $parameters): void
+    public function generate(array $parameters)
     {
         $contents = $this->filter(
             $this->contents(), $parameters
